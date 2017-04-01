@@ -1,0 +1,27 @@
+<md-content>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Template Editor: {{templateEditor.name}}</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button button-revert" aria-label="undo"
+                       ng-click="revertTemplate()" ng-disabled="editor.$pristine">
+                <md-icon>settings_backup_restore</md-icon>
+                <md-tooltip>Revert changes</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button button-save" aria-label="save"
+                       ng-click="saveTemplate()" ng-disabled="editor.$pristine">
+                <md-icon>save</md-icon>
+                <md-tooltip>Save changes</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button button-save" aria-label="close" ng-click="closeEditor()">
+                <md-icon>close</md-icon>
+                <md-tooltip>Close editor</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+</md-content>
+<form name="editor">
+    <div ui-ace="{mode: 'ftl'}" ng-model="templateEditor.template.values[0]"></div>
+</form>

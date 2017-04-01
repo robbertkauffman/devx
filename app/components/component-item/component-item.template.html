@@ -1,0 +1,28 @@
+<div class="component-item">
+    <md-list-item class="md-2-line component" ng-click="component.node.type == 'CONTAINER_COMPONENT' || editComponent(component.node)">
+        <md-button class="md-icon-button" aria-label="expand/collapse"
+                   ng-click="component.node.nodes.length == 0 || toggleComponent(component.node, $event)">
+            <md-tooltip ng-hide="component.node.nodes.length == 0" md-direction="right">Expand / Collapse</md-tooltip>
+            <md-icon ng-if="component.node.nodes.length > 0" class="component-icon">{{component.node.collapsed ? 'expand_less' : 'expand_more'}}</md-icon>
+            <md-icon ng-if="component.node.nodes.length == 0" class="component-icon">web</md-icon>
+        </md-button>
+        <div class="md-list-item-text">
+            <h3>{{component.node.name}}</h3>
+            <p class="component-id">{{component.node.path}}</p>
+        </div>
+
+        <md-button class="md-icon-button button-edit" aria-label="edit component"
+                   ng-disabled="component.node.path == component.selectedComponent()"
+                   ng-class="{disabled: component.node.path == component.selectedComponent()}"
+                   ng-click="editComponent(component.node)" ng-hide="component.node.type == 'CONTAINER_COMPONENT'">
+            <md-tooltip md-direction="left">Edit</md-tooltip>
+            <md-icon>mode_edit</md-icon>
+        </md-button>
+    </md-list-item>
+    <component-editor node="component.node" ng-if="component.selectedComponent() == component.node.path" class="component-editor"></component-editor>
+    <div class="component-children">
+        <md-divider ng-class="{'divider-children-offset': component.node.nodes.length > 0}"></md-divider>
+        <component-item ng-repeat="node in component.node.nodes" node="node">
+        </component-item>
+    </div>
+</div>

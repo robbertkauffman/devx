@@ -1,0 +1,82 @@
+/* app css stylesheet */
+
+.ace_editor  {
+  height : 300px;
+}
+
+.md-icon-button.button-edit md-icon {
+  color: #F44336;
+}
+
+.md-icon-button.button-edit.disabled md-icon {
+  color: rgba(0,0,0,0.12)
+}
+
+.md-icon-button.button-create md-icon {
+  color: rgb(63, 81, 181);
+}
+
+.md-icon-button.button-revert {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+#component-list .component-children {
+  margin-left: 20px;
+}
+
+#component-list .component-children md-divider {
+  margin-left: -20px;
+}
+
+#component-list .component-editor md-content {
+  background-color: #eee;
+}
+
+#component-list .md-list-item-text .component-id {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.parameter {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.parameter:first-child {
+  margin-top: 18px;
+}
+
+.template-selector {
+  display: inline-block !important;
+  width: 50%;
+  width: calc(100% - 112px);
+}
+
+.template-editor {
+  min-width: 800px;
+  min-height: 300px;
+  max-width: 1000px;
+  max-height: 600px;
+}
+
+md-input-container.md-button-right {
+  padding-right: 52px;
+}
+
+md-input-container.md-button-right > button {
+  margin: 0;
+  top: 8px;
+  right: 2px;
+  left: auto;
+  position: absolute;
+}
+
+md-grid-list.page-info md-grid-tile span {
+  position: absolute;
+  left: 0;
+}
+
+div#site-url-form {
+  min-height: 124px;
+}

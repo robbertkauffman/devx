@@ -1,0 +1,56 @@
+<md-content layout-padding>
+    <form name="componentProperties">
+        <div layout="row" layout-align="center">
+            <md-button class="md-icon-button button-revert" aria-label="undo"
+                       ng-click="revertComponent()" ng-disabled="componentProperties.$pristine">
+                <md-icon>settings_backup_restore</md-icon>
+                <md-tooltip>Revert changes</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button button-save" aria-label="save"
+                       ng-click="saveComponent()" ng-disabled="componentProperties.$pristine">
+                <md-icon>save</md-icon>
+                <md-tooltip>Save changes</md-tooltip>
+            </md-button>
+        </div>
+
+        <md-input-container class="md-block template-selector" flex>
+            <label>Template</label>
+            <md-select name="hst:template" ng-model="componentEditor.selectedTemplate.changeTemplate"
+                       ng-model-options="{ getterSetter: true, trackBy: 'trackTemplate($value)'}">
+                <md-option ng-value="undefined">No template assigned</md-option>
+                <md-option ng-repeat="template in componentEditor.templates" ng-value="template">
+                    {{template.fields['jcr:path'] | removePath}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-button class="md-icon-button button-edit" aria-label="edit component"
+                   ng-disabled="componentEditor.selectedTemplate.template == undefined"
+                   ng-class="{disabled: componentEditor.selectedTemplate.template == undefined}"
+                   ng-click="editTemplate()">
+            <md-tooltip md-direction="right">Edit</md-tooltip>
+            <md-icon>mode_edit</md-icon>
+        </md-button>
+        <!--<md-button class="md-icon-button button-create" aria-label="create template"
+                   ng-click="createTemplate($event)">
+            <md-tooltip md-direction="right">Add</md-tooltip>
+            <md-icon>add_box</md-icon>
+        </md-button>-->
+
+        <md-input-container ng-repeat="property in componentEditor.selectedComponent.properties | filter: {'type': 'String', 'multiple': false, 'name': '!hst:template'} | orderBy: 'name'" class="md-block">
+            <label>{{property.name}}</label>
+            <input name="{{property.name}}" ng-model="property.values[0]">
+        </md-input-container>
+
+        <div layout="row">
+            <div flex ng-repeat="property in componentEditor.selectedComponent.properties | filter: {'type': 'String', 'multiple': true} | orderBy: 'name'">
+                <div ng-form="{{property.name | removeColon}}">
+                    <md-input-container class="parameter" ng-repeat="propValue in property.values track by $index">
+                        <label ng-show="$first">{{property.name}}</label>
+                        <input name="{{propValue}}" ng-model="property.values[$index]" placeholder="...">
+                    </md-input-container>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--<p>{{componentProperties.$pristine}} - {{componentProperties.$dirty}}</p>-->
+</md-content>

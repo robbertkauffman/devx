@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="devPanel">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="material-icons.css">
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link rel="stylesheet" href="app.css">
+</head>
+<body ng-controller="DevPanelCtrl as devPanel">
+    <div layout="row" layout-fill>
+        <div flex="60">
+            <div layout="column" layout-fill>
+                <div flex>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <span>Dev-X - Template Editor</span>
+                    </div>
+                </md-toolbar>
+                </div>
+                <div flex id="site-url-form">
+                    <md-content layout-padding>
+                        <form>
+                            <md-input-container class="md-block md-icon-float md-button-right">
+                                <label>URL to site</label>
+                                <input name="siteUrl" ng-model="devPanel.siteUrl" placeholder="http://localhost:8080/site">
+                                <md-button class="md-icon-button" aria-label="change URL"
+                                           ng-disabled="devPanel.siteUrl == undefined"
+                                           ng-class="{disabled: devPanel.siteUrl == undefined}"
+                                           ng-click="devPanel.changeSiteUrl()" type="submit">
+                                    <md-tooltip md-direction="right">Go</md-tooltip>
+                                    <md-icon>arrow_forward</md-icon>
+                                </md-button>
+                            </md-input-container>
+                        </form>
+                    </md-content>
+                </div>
+                <div flex layout-fill>
+                    <iframe id="siteIframe" layout-fill></iframe>
+                </div>
+            </div>
+        </div>
+        <div layout="row" flex="40">
+            <md-content layout-fill>
+                <section>
+                    <md-toolbar layout="row">
+                        <div class="md-toolbar-tools" layout="row">
+                            <div flex>
+                                <span>Editing page: {{devPanel.pageConfig.componentConfigurationId}}</span>
+                            </div>
+                            <div layout="row" layout-align="end">
+                                <md-button class="md-fab md-primary md-mini" aria-label="Settings" ng-click="devPanel.changeSettings()">
+                                    <md-icon>settings</md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+                    </md-toolbar>
+                    <div layout-padding>
+                        <md-grid-list md-cols="2" md-row-height="8:1" md-gutter="0px" class="page-info">
+                            <md-grid-tile>
+                                <span class="md-body-1">Resolved sitemap item:</span>
+                            </md-grid-tile>
+                            <md-grid-tile>
+                                <span class="md-body-1">{{devPanel.pageConfig.resolvedSiteMapItem}}</span>
+                            </md-grid-tile>
+                            <md-grid-tile>
+                                <span class="md-body-1">Component configuration name:</span>
+                            </md-grid-tile>
+                            <md-grid-tile>
+                                <span class="md-body-1">{{devPanel.pageConfig.componentConfigurationName}}</span>
+                            </md-grid-tile>
+                            <md-grid-tile>
+                                <span class="md-body-1">Base render path:</span>
+                            </md-grid-tile>
+                            <md-grid-tile>
+                                <span class="md-body-1">{{devPanel.pageConfig.renderPath}}</span>
+                            </md-grid-tile>
+                            <md-grid-tile>
+                                <span class="md-body-1">Relative content path:</span>
+                            </md-grid-tile>
+                            <md-grid-tile>
+                                <span class="md-body-1">{{devPanel.pageConfig.relativeContentPath || "-"}}</span>
+                            </md-grid-tile>
+                        </md-grid-list>
+                    </div>
+                    <md-divider></md-divider>
+                </section>
+                <section>
+                    <md-list flex id="component-list" class="md-dense">
+                        <component-item ng-repeat="node in devPanel.components" node="node">
+                        </component-item>
+                    </md-list>
+                </section>
+            </md-content>
+        </div>
+    </div>
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+<script src="bower_components/angular-ui-tree/dist/angular-ui-tree.min.js"></script>
+<script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+<script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+<script src="app.js"></script>
+<script src="components/component-item/component-item.module.js"></script>
+<script src="components/component-item/component-item.component.js"></script>
+<script src="components/component-editor/component-editor.module.js"></script>
+<script src="components/component-editor/component-editor.component.js"></script>
+<script src="components/template-editor/template-editor.module.js"></script>
+<script src="components/template-editor/template-editor.component.js"></script>
+<script src="services/component-editor-service.module.js"></script>
+<script src="services/component-editor-service.service.js"></script>
+</body>
+</html>
