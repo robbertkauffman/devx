@@ -10,3 +10,4 @@ tmp
 .settings/
 target/
 /.classpath
+/dependencies/generated/
