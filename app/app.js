@@ -3,7 +3,6 @@
 // Declare app level module which depends on views, and components
 angular.module('devPanel', [
     'ngMaterial',
-    'ui.tree',
     'ui.ace',
     'componentItem',
     'componentEditor',
