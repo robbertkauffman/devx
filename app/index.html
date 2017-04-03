@@ -12,17 +12,25 @@
     <link rel="stylesheet" href="app.css">
 </head>
 <body ng-controller="DevPanelCtrl as devPanel">
-    <div layout="row" layout-fill>
-        <div flex="60">
-            <div layout="column" layout-fill>
-                <div flex>
-                    <md-toolbar>
-                        <div class="md-toolbar-tools">
-                            <span>Dev-X - Template Editor</span>
-                        </div>
-                    </md-toolbar>
+    <div layout="column" layout-fill>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <div flex="60">
+                    <span>Dev-X - Template Editor</span>
                 </div>
-                <div flex id="site-url-form">
+                <div flex layout-padding>
+                    <span>Editing page: {{devPanel.pageConfig.componentConfigurationId}}</span>
+                </div>
+                <div layout-align="end">
+                    <md-button class="md-fab md-primary md-mini" aria-label="Settings" ng-click="devPanel.changeSettings()">
+                        <md-icon>settings</md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </md-toolbar>
+        <div layout="row" flex>
+            <div flex="60">
+                <div layout="column" layout-fill>
                     <md-content layout-padding>
                         <form>
                             <md-input-container class="md-block md-icon-float md-button-right">
@@ -38,64 +46,52 @@
                             </md-input-container>
                         </form>
                     </md-content>
-                </div>
-                <div flex layout-fill>
-                    <iframe id="siteIframe" layout-fill></iframe>
+                    <div flex>
+                        <iframe id="siteIframe" layout-fill></iframe>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div layout="row" flex="40">
-            <md-content layout-fill>
-                <section>
-                    <md-toolbar layout="row">
-                        <div class="md-toolbar-tools" layout="row">
-                            <div flex>
-                                <span>Editing page: {{devPanel.pageConfig.componentConfigurationId}}</span>
-                            </div>
-                            <div layout="row" layout-align="end">
-                                <md-button class="md-fab md-primary md-mini" aria-label="Settings" ng-click="devPanel.changeSettings()">
-                                    <md-icon>settings</md-icon>
-                                </md-button>
-                            </div>
+            <div flex="40">
+                <md-content layout-fill>
+                    <section>
+                        <div layout-padding>
+                            <md-grid-list md-cols="2" md-row-height="8:1" md-gutter="0px" class="page-info">
+                                <md-grid-tile>
+                                    <span class="md-body-1">Resolved sitemap item:</span>
+                                </md-grid-tile>
+                                <md-grid-tile>
+                                    <span class="md-body-1">{{devPanel.pageConfig.resolvedSiteMapItem}}</span>
+                                </md-grid-tile>
+                                <md-grid-tile>
+                                    <span class="md-body-1">Component configuration name:</span>
+                                </md-grid-tile>
+                                <md-grid-tile>
+                                    <span class="md-body-1">{{devPanel.pageConfig.componentConfigurationName}}</span>
+                                </md-grid-tile>
+                                <md-grid-tile>
+                                    <span class="md-body-1">Base render path:</span>
+                                </md-grid-tile>
+                                <md-grid-tile>
+                                    <span class="md-body-1">{{devPanel.pageConfig.renderPath}}</span>
+                                </md-grid-tile>
+                                <md-grid-tile>
+                                    <span class="md-body-1">Relative content path:</span>
+                                </md-grid-tile>
+                                <md-grid-tile>
+                                    <span class="md-body-1">{{devPanel.pageConfig.relativeContentPath || "-"}}</span>
+                                </md-grid-tile>
+                            </md-grid-list>
                         </div>
-                    </md-toolbar>
-                    <div layout-padding>
-                        <md-grid-list md-cols="2" md-row-height="8:1" md-gutter="0px" class="page-info">
-                            <md-grid-tile>
-                                <span class="md-body-1">Resolved sitemap item:</span>
-                            </md-grid-tile>
-                            <md-grid-tile>
-                                <span class="md-body-1">{{devPanel.pageConfig.resolvedSiteMapItem}}</span>
-                            </md-grid-tile>
-                            <md-grid-tile>
-                                <span class="md-body-1">Component configuration name:</span>
-                            </md-grid-tile>
-                            <md-grid-tile>
-                                <span class="md-body-1">{{devPanel.pageConfig.componentConfigurationName}}</span>
-                            </md-grid-tile>
-                            <md-grid-tile>
-                                <span class="md-body-1">Base render path:</span>
-                            </md-grid-tile>
-                            <md-grid-tile>
-                                <span class="md-body-1">{{devPanel.pageConfig.renderPath}}</span>
-                            </md-grid-tile>
-                            <md-grid-tile>
-                                <span class="md-body-1">Relative content path:</span>
-                            </md-grid-tile>
-                            <md-grid-tile>
-                                <span class="md-body-1">{{devPanel.pageConfig.relativeContentPath || "-"}}</span>
-                            </md-grid-tile>
-                        </md-grid-list>
-                    </div>
-                    <md-divider></md-divider>
-                </section>
-                <section>
-                    <md-list flex id="component-list" class="md-dense">
-                        <component-item ng-repeat="node in devPanel.components" node="node">
-                        </component-item>
-                    </md-list>
-                </section>
-            </md-content>
+                        <md-divider></md-divider>
+                    </section>
+                    <section>
+                        <md-list flex id="component-list" class="md-dense">
+                            <component-item ng-repeat="node in devPanel.components" node="node">
+                            </component-item>
+                        </md-list>
+                    </section>
+                </md-content>
+            </div>
         </div>
     </div>
 <!-- In production use:

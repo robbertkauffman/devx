@@ -76,7 +76,3 @@ md-grid-list.page-info md-grid-tile span {
   position: absolute;
   left: 0;
 }
-
-div#site-url-form {
-  min-height: 124px;
-}
