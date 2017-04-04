@@ -16,37 +16,80 @@ Without these the tool will not work.
  cd dependencies
  mvn clean install
  ```
-2. Add the jcr-api dependency to your Hippo project, by adding the following to the *essentials/pom.xml*:
+2. Add the jcr-api dependency to your Hippo project, by adding the following to the *essentials/pom.xml* in the 
+*\<projects>* section:
  ```
- <dependency>
-   <groupId>org.onehippo.devx</groupId>
-   <artifactId>jcr-api</artifactId>
-   <version>0.1.0-SNAPSHOT</version>
- </dependency>
+ <profiles>
+   <profile>
+     <id>devx</id>
+     <activation>
+       <property>
+         <name>devx</name>
+       </property>
+     </activation>
+     <dependencies>
+       <dependency>
+         <groupId>org.onehippo.devx</groupId>
+         <artifactId>jcr-api</artifactId>
+         <version>0.1.0-SNAPSHOT</version>
+       </dependency>
+     </dependencies>
+     <build>
+       <resources>
+         <resource>
+           <directory>devx</directory>
+         </resource>
+       </resources>
+     </build>
+   </profile>
+ </profiles>
  ```
-3. Copy the file *dependencies/essentials/applicationContext.xml* to *essentials/src/main/resources* in your Hippo 
+3. Copy the file *dependencies/essentials/applicationContext.xml* to *essentials/devx* in your Hippo 
  project:
  ```
-  cp dependencies/essentials/applicationContext.xml <YOUR_HIPPO_FOLDER>/essentials/src/main/resources
+ mkdir -p <YOUR_HIPPO_FOLDER>/essentials/devx
+ cp dependencies/essentials/applicationContext.xml <YOUR_HIPPO_FOLDER>/essentials/devx
  ```
 4. Add the site-services dependency to your Hippo project, by adding the following to the *site/pom.xml*:
  ```
- <dependency>
-   <groupId>org.onehippo.devx</groupId>
-   <artifactId>site-services</artifactId>
-   <version>0.1.0-SNAPSHOT</version>
- </dependency>
+ <profiles>
+   <profile>
+     <id>devx</id>
+     <activation>
+       <property>
+         <name>devx</name>
+       </property>
+     </activation>
+     <dependencies>
+       <dependency>
+         <groupId>org.onehippo.devx</groupId>
+         <artifactId>site-services</artifactId>
+         <version>0.1.0-SNAPSHOT</version>
+       </dependency>
+     </dependencies>
+   </profile>
+ </profiles>
  ```
 5. Build the Dev-X Application
  ```
-  cd app
-  npm install
+ cd app
+ npm install
  ```
 6. After the application has finished building, you can start the application by following the instructions in the next
  chapter: *Running the application*
  
 ## Running the application
-After you have installed the application, you can run the application using the following command in the *app* folder:
+Before you can run the application, you will have to build your Hippo project using a special command so it includes the 
+Dev-X dependencies. This prevents the dependencies from being included when running the project outside of local 
+development. All you need to do is add the parameter *-Ddevx=true* when building the project:
+```
+mvn clean verify -Ddevx=true
+```
+After the build is succesful, you can run the project using the regular cargo command:
+```
+mvn -Pcargo.run
+```
+When Hippo is up and running, you can run the application using the following command in the *app* folder:
 ```
 npm start
 ```
