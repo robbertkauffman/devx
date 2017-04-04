@@ -117,6 +117,10 @@ work by Jeroen Reijn
 When building the JCR-API with Maven, it will automatically create documentation in Markdown using Swagger. This can be 
 found under *dependencies/generated/markdown/rest-api-docs.md*.
 
+## Limitations
+The application is intended for local development purposes only. Additionally, the Template Editor only supports editing
+Freemarker templates. There currently is no support for editing JSPs.
+
 ## Known issues
 A list of the known issues can be found on the [DevX Trello board](https://trello.com/b/TPDdb0lb/hippo-devx).
 
