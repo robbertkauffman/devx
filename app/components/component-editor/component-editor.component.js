@@ -94,6 +94,8 @@ function ComponentEditorCtrl ($scope, $http, $mdPanel, $mdToast, constants, remo
                             response.config.data.values + '\' succesfully with URL: ' +
                             response.config.url);
                     // console.log(response);
+                    // reload iframe to show changes
+                    ComponentEditorService.reloadIframe();
 
                     // set the form to unchanged
                     $scope.componentProperties.$setPristine();

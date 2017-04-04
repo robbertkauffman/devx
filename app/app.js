@@ -44,7 +44,8 @@ angular.module('devPanel', [
     "DEFAULT_API_URL": "http://localhost:8080/essentials/rest",
     "DEFAULT_SITE_URL": "http://localhost:8080/site/",
     "DEV_MODE_PARAM": "?dev=true",
-    "PREVIEW_CONFIGURATION_SUFFIX": "-preview"
+    "PREVIEW_CONFIGURATION_SUFFIX": "-preview",
+    "IFRAME_ID": "#siteIframe"
 })
 .filter('removePath', function() {
     return function(input) {
@@ -76,14 +77,13 @@ function DevPanelCtrl ($http, constants, $mdDialog, $rootScope) {
     // declare this function before it is called later when variables/URLs are initialized
     vm.changeSiteUrl = function () {
         // change URL of iframe
-        angular.element("#siteIframe").attr("src", vm.siteUrl);
-        loadComponents(vm.siteUrl);
+        angular.element(constants.IFRAME_ID).attr("src", $rootScope.siteUrl);
+        loadComponents($rootScope.siteUrl);
     };
 
-    // initialize site with default URL
-    vm.siteUrl = constants.DEFAULT_SITE_URL;
-    // initialize the API url on the root scope, as it's a global
+    // initialize the site URL and API url on the root scope, as they're globals
     $rootScope.apiUrl = constants.DEFAULT_API_URL;
+    $rootScope.siteUrl = constants.DEFAULT_SITE_URL;
     // check for preview HST configuration
     // since application doesn't work with it present, if found, show dialog to ask if configuration can be deleted
     checkPreviewConfiguration();
@@ -107,7 +107,7 @@ function DevPanelCtrl ($http, constants, $mdDialog, $rootScope) {
                 showDeletePreviewDialog(response.data.nodes);
             // otherwise load the component editor
             } else {
-                vm.changeSiteUrl(vm.siteUrl);
+                vm.changeSiteUrl($rootScope.siteUrl);
             }
         });
     }
@@ -148,7 +148,7 @@ function DevPanelCtrl ($http, constants, $mdDialog, $rootScope) {
     function deletePreviewConfiguration(url) {
         $http.delete(url).then(function (response) {
             // load the component editor after the configuration has been removed
-            vm.changeSiteUrl(vm.siteUrl);
+            vm.changeSiteUrl($rootScope.siteUrl);
             console.log(url);
         });
     }
@@ -161,11 +161,11 @@ function DevPanelCtrl ($http, constants, $mdDialog, $rootScope) {
         // for Chrome, the origin property is in the event.originalEvent object.
         var origin = event.origin || event.originalEvent.origin;
         // check if origin starts with site URL for security reasons, otherwise skip
-        if (vm.siteUrl.startsWith(origin)) {
+        if ($rootScope.siteUrl.startsWith(origin)) {
             // check if URL is different than current site URL, otherwise it will loop
-            if (vm.siteUrl != event.data) {
-                vm.siteUrl = event.data;
-                loadComponents(vm.siteUrl);
+            if ($rootScope.siteUrl != event.data) {
+                $rootScope.siteUrl = event.data;
+                loadComponents($rootScope.siteUrl);
             }
         }
     }

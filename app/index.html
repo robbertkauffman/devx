@@ -35,10 +35,10 @@
                         <form>
                             <md-input-container class="md-block md-icon-float md-button-right">
                                 <label>URL to site</label>
-                                <input name="siteUrl" ng-model="devPanel.siteUrl" placeholder="http://localhost:8080/site">
+                                <input name="siteUrl" ng-model="$root.siteUrl" placeholder="http://localhost:8080/site">
                                 <md-button class="md-icon-button" aria-label="change URL"
-                                           ng-disabled="devPanel.siteUrl == undefined"
-                                           ng-class="{disabled: devPanel.siteUrl == undefined}"
+                                           ng-disabled="$root.siteUrl == undefined"
+                                           ng-class="{disabled: $root.siteUrl == undefined}"
                                            ng-click="devPanel.changeSiteUrl()" type="submit">
                                     <md-tooltip md-direction="right">Go</md-tooltip>
                                     <md-icon>arrow_forward</md-icon>

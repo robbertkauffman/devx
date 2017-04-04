@@ -4,9 +4,9 @@ angular
     .module('templateEditor')
     .controller('TemplateEditorCtrl', TemplateEditorCtrl);
 
-TemplateEditorCtrl.$inject = ['$scope', '$http', '$mdDialog', 'data', 'url', 'name', 'mdPanelRef'];
+TemplateEditorCtrl.$inject = ['$scope', '$http', '$mdDialog', 'data', 'url', 'name', 'mdPanelRef', 'ComponentEditorService'];
 
-function TemplateEditorCtrl ($scope, $http, $mdDialog, data, url, name, mdPanelRef) {
+function TemplateEditorCtrl ($scope, $http, $mdDialog, data, url, name, mdPanelRef, ComponentEditorService) {
     var vm = this;
     // set local binded variables
     vm.template = data;
@@ -26,6 +26,8 @@ function TemplateEditorCtrl ($scope, $http, $mdDialog, data, url, name, mdPanelR
                 console.log(response);
                 console.log(response.config.data);
             } else {
+                // reload iframe to show changes
+                ComponentEditorService.reloadIframe();
                 // used for revert function
                 vm.originalTemplate = data;
                 // set the template editor to unchanged

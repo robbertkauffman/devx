@@ -44,6 +44,15 @@ function ComponentEditorService ($http, constants, $mdDialog, $rootScope) {
         }
     }
 
+    service.reloadIframe = function() {
+        var iframe = $(constants.IFRAME_ID);
+        if (iframe.length > 0) {
+            iframe.attr('src', $rootScope.siteUrl);
+        } else {
+            console.log("Could not find iframe with ID " + constants.IFRAME_ID);
+        }
+    }
+
     service.getComponentForm = function () {
         return _componentForm;
     };
