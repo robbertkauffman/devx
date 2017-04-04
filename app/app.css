@@ -88,3 +88,12 @@ md-grid-list.page-info md-grid-tile span {
 #settings-dialog md-dialog-content {
   width: 400px;
 }
+
+span.warning-text {
+  color: red;
+  font-weight: bold;
+}
+
+md-dialog.delete-preview-configuration-dialog .md-dialog-content-body {
+  width: 550px;
+}

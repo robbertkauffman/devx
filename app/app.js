@@ -115,10 +115,12 @@ function DevPanelCtrl ($http, constants, $mdDialog, $rootScope) {
     // dialog for deleting preview configuration
     function showDeletePreviewDialog(previewNodes) {
         var config = {
+            templateUrl: "../../templates/delete-preview-configuration-dialog.template.html",
             // disable closing the dialog by user,
             // because we don't want the user to use the application if there's preview configuration
             clickOutsideToClose: false,
-            escapeToClose: false
+            escapeToClose: false,
+            fullscreen: true
         };
         // build dialog
         var confirm = $mdDialog.alert(config)
