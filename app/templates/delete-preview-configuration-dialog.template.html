@@ -1,0 +1,19 @@
+<md-dialog aria-label="Delete preview configuration">
+    <md-dialog-content class="md-dialog-content">
+        <h2 class="md-title">Preview configuration found</h2><
+        <div  class="md-dialog-content-body">
+            <p class="ng-binding">
+                The Dev-X Application does not function properly when preview configuration is present.
+                By continuing, all preview configuration will be deleted and
+                <span class="warning-text">any unpublished changes will be LOST</span>.
+                Do you want to delete all preview configuration?
+            </p>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <button class="md-primary md-confirm-button md-button" type="button"
+                ng-click="dialog.hide()" md-autofocus="dialog.$type==='alert'">
+            Delete preview configuration
+        </button>
+    </md-dialog-actions>
+</md-dialog>

@@ -172,7 +172,10 @@ function DevPanelCtrl ($http, constants, $mdDialog, $rootScope) {
 
     // dialog for changing API url
     vm.changeSettings = function () {
-        var confirm = $mdDialog.prompt()
+        var config =  {
+            parent: angular.element("#settings-dialog")
+        }
+        var confirm = $mdDialog.prompt(config)
                 .title('Change settings')
                 .ariaLabel('Change settings')
                 .textContent('Hippo API URL')

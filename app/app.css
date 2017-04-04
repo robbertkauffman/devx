@@ -76,3 +76,15 @@ md-grid-list.page-info md-grid-tile span {
   position: absolute;
   left: 0;
 }
+
+.md-dialog-is-showing #settings-dialog {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+#settings-dialog md-dialog-content {
+  width: 400px;
+}
