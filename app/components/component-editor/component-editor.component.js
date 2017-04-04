@@ -19,7 +19,10 @@ function ComponentEditorCtrl ($scope, $http, $mdPanel, $mdToast, constants, remo
     var vm = this;
 
     // initialize component editor by retrieving component properties
-    getComponent(this.node);
+    // do this after the component and its bindings have been initialized
+    vm.$onInit = function() {
+        getComponent(vm.node);
+    };
 
     // get component properties
     function getComponent(node) {
